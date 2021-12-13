@@ -1,0 +1,59 @@
+{% extends 'kidswear/index.html' %} {% load static %} {% block title %}kidswear
+cart{% endblock title %} {% block css %}<link
+  rel="stylesheet"
+  href="{% static 'kidswear/css/cart.css' %}"
+/>
+{% endblock css %} {% block body %}
+<div class="empty__cart">
+  <h1>Noting in cart</h1>
+  <h2>continue to buy...</h2>
+  <a href="/#featured">👉 Go to products</a>
+</div>
+<div class="cart container">
+  <div class="cart__left" id="addCartI">
+    <div class="cart__header">
+      <h3 class="cart__title">Shopping cart</h3>
+      <span class="cart__prices">price</span>
+    </div>
+    <ul id="hiiiii"></ul>
+  </div>
+  <div class="cart__right">
+    <div class="subtotal">
+      <div>
+        <p class="total__items">
+          Subtotal (<span id="subItems"></span> items):
+          <strong id="subTotal"></strong>
+        </p>
+        <p class="total__items">Tax: <strong id="ttax"></strong></p>
+        <p class="total__items">Total: <strong id="finalPay"></strong></p>
+      </div>
+      <a href="/shipping" class="proceedtopay">Proceed to Checkout</a>
+    </div>
+  </div>
+</div>
+{% endblock body %} {% block javascript %}
+
+<script src="{% static 'kidswear/javascript/cart.js' %}"></script>
+{% endblock javascript %}
+<!-- checkout__productPage -->
+<!-- <div class="checkout__productPage">
+      <a href="/">
+        <div class="checkoutProduct__image">
+          <img class="${cart[item].image}" src="" alt="" />
+        </div>
+      </a>
+      <div class="checkoutProductInfo">
+        <div class="checkOutProductDetails">
+          <p class="ProductName">${cart[item].name}</p>
+          <div class="prdQuantity">
+            <span>Qut : <input type="number" readOnly class='prdquantity' value="1" min='1' max="10" /></span>
+            <button class="removeFCart">Remove</button>
+          </div>
+        </div>
+        <span class="copPPrice">$</span>
+      </div>
+    </div> 
+
+  
+  
+  -->

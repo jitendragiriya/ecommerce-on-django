@@ -1,0 +1,51 @@
+{% extends 'kidswear/index.html' %} {% load static %} {% block title %}kidswear signup{% endblock title%} {% block css %}
+<link rel="stylesheet" href="{% static 'kidswear/css/form.css' %}" />
+{% endblock css %} {% block body %}
+<div class="allTypeFormPage">
+  <div class="mainFormContainer">
+    <div class="form__header">
+      <h2>Signup</h2>
+      <p>Already have an account ? <a href="/login">login</a></p>
+    </div>
+    <form id="signup__form" class="formClass" action="/signup" method="post">
+      {% csrf_token %}
+      <div class="form__control">
+        <label for="name">Username</label>
+        <input type="text" id="name" name="username" />
+      </div>
+      <div class="form__control">
+        <label for="firstname">Firstname</label>
+        <input type="text" id="firstname" name="firstname" />
+      </div>
+      <div class="form__control">
+        <label for="lastname">Lastname</label>
+        <input type="text" id="lastname" name="lastname" />
+      </div>
+      <div class="form__control">
+        <label for="name">Email</label>
+        <input type="text" id="email" name="email" />
+      </div>
+      <div class="form__control password">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="password"
+          name="password"
+          minlength="8"
+        />
+      </div>
+      <div class="form__control password">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          class="confirmPassword"
+          name="confirmPassword"
+        />
+      </div>
+      <button type="submit" class="formSubmitBtn">Register</button>
+    </form>
+  </div>
+</div>
+{% endblock body %}

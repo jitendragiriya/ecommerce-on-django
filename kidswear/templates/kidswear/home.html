@@ -1,0 +1,88 @@
+{% extends 'kidswear/index.html' %} {% block title %}kidswear{% endblock title%}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'kidswear/css/home.css' %}" />{% endblock css %}
+{% block body %}
+<div class="hero">
+  <div class="hero__content container">
+    <h1>
+      <span>
+        Get <span class="color">50%</span> off your first shopping with
+      </span>
+      <span> SHOP<span class="color">ME</span> online shop </span>
+    </h1>
+    <a href="#featured" class="btn btn-hero"> shop now </a>
+  </div>
+
+  <a href="#featured" class="goto__next">
+    <span>
+      <i class="fas fa-angle-down"></i>
+    </span>
+  </a>
+</div>
+<div class="section new__arrival" id="new__arrival">
+  <div class="arrivals container">
+    <div class="title">
+      <h1 class="primary__title">New Arrival</h1>
+    </div>
+
+    <div class="arrival__center">
+      {% for p in newArrival %}
+      <div class="product">
+        <div class="img__container"><a href="/{{p.id}}">
+          <img src="{{p.image}}" /></a>
+        </div>
+        <div class="product__bottom">
+          <h3>{{p.product_name}}</h3>
+          <h4>₹{{p.price}}</h4>
+          <button
+            id="{{p.id}}"
+            class="addToCart"
+            onclick="{addToCart('{{p.id}}', '{{p.product_name}}','{{p.image}}','{{p.price}}')}"
+          >
+            Add To Cart
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div class="special__offer">
+  <div class="offer__container">
+    <h1>SPECIAL OFFER</h1>
+    <p>Special Offer Discount valid for Only this Week</p>
+    <a href="#">SHOP NOW</a>
+  </div>
+</div>
+<div class="section featured" id="featured">
+  <div class="featured__container container">
+    <div class="title">
+      <h1 class="primary__title">Featured Products</h1>
+    </div>
+
+    <div class="featured__center">
+      {% for p in product %}
+      <div class="product">
+        <div class="img__container"><a href="/{{p.id}}">
+          <img src="{{p.image}}" /></a>
+        </div>
+        <div class="product__bottom">
+          <h3 class='product_name'>{{p.product_name}}</h3>
+          <h4>₹{{p.price}}</h4>
+          <button
+            id="{{p.id}}"
+            class="addToCart"
+            onclick="{addToCart('{{p.id}}', '{{p.product_name}}','{{p.image}}','{{p.price}}')}"
+          >
+            Add To Cart
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock body %} {% block javascript %}
+<script src="{% static 'kidswear/javascript/home.js' %}"></script>
+{% endblock javascript %}

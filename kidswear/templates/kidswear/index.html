@@ -5,149 +5,100 @@
     <meta charset="UTF-8" />
     <meta http-eMEuiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href={% static 'kidswear/style.css' %}>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'kidswear/favicon.ico' %}"
+    />
+    <link rel="stylesheet" href="{% static 'kidswear/css/index.css' %}" />
+    {% block css %}{% endblock css %}
     <script
       src="https://kit.fontawesome.com/04fab1aa05.js"
       crossorigin="anonymous"
     ></script>
-    <title>kidswear</title>
+    <title>{% block title %}{% endblock title %}</title>
   </head>
   <body>
     <header id="header" class="header">
-      <div class="navigation">
-        <nav class="nav__center">
-          <div class="nav__header">
-            <div class="nav__logo">
-              <h1>SHOP<span>ME</span></h1>
-            </div>
-
-            <div class="nav__hamburger">
-              <span>
-                <i class="fas fa-bars"></i>
-              </span>
-            </div>
-          </div>
-
-          <div class="nav__menu">
-            <div class="menu__top">
-              <h1 class="nav__category">SHOP<span>ME</span></h1>
-              <div class="close__toggle"></div>
-            </div>
-            <ul class="nav__list">
-              <li class="nav__item">
-                <a href="#header" class="nav__link"> Home </a>
-              </li>
-
-              <li class="nav__item">
-                <a href="#featured" class="nav__link"> Featured </a>
-              </li>
-
-              <li class="nav__item">
-                <a href="#newsletter" class="nav__link"> Subscribe </a>
-              </li>
-
-              <li class="nav__item">
-                <a href="#" class="nav__link"> Login </a>
-              </li>
-
-              <li class="nav__item">
-                <a href="#" class="nav__link"> Register </a>
-              </li>
-            </ul>
-
-            <ul class="nav__icons">
-              <a href="#" class="icon__item">
-                <i class="fas fa-shopping-cart"></i>
-                <span>2</span>
-              </a>
-            </ul>
-          </div>
-        </nav>
-      </div>
-      <div class="hero">
-        <div class="hero__content container">
-          <h1>
-            <span>
-              Get <span class="color">50%</span> off your first shopping with
-            </span>
-            <span> SHOP<span class="color">ME</span> online shop </span>
+      <nav class="navigation">
+        <div class="menu__top">
+          <h1 class="nav__logo">
+            <a href="/">SHOP<span>ME</span></a>
           </h1>
-          <a href="#" class="btn btn-hero"> shop now </a>
+          <div class="close__toggle"></div>
         </div>
 
-        <a href="#new__arrival" class="goto__next">
-          <span>
-            <i class="fas fa-angle-down"></i>
-          </span>
-        </a>
-      </div>
+        <ul class="nav__list">
+          <div class="menu__top">
+            <h1 class="nav__logo responsive">
+              <a href="/">SHOP<span>ME</span></a>
+            </h1>
+            <div class="close__toggle"></div>
+          </div>
+          <li class="nav__item">
+            <a href="/" class="nav__link"> Home </a>
+          </li>
+
+          <li class="nav__item">
+            <a href="/#new__arrival" class="nav__link"> What's new </a>
+          </li>
+
+          <li class="nav__item">
+            <a href="/#featured" class="nav__link"> Featured </a>
+          </li>
+
+          {% if user.is_authenticated %}
+          <li class="nav__item">
+            <a href="/logout" class="nav__link">Logout </a>
+          </li>
+          <li class="nav__item">
+            <span class="nav__link">{{request.user}}</span>
+          </li>
+
+          {% else %}
+          <li class="nav__item">
+            <a href="/login" class="nav__link"> Login </a>
+          </li>
+
+          <li class="nav__item highlight">
+            <a href="/signup" class="nav__link"> Register </a>
+          </li>
+
+          {% endif %}
+        </ul>
+        <ul class="nav__icons">
+          <li class="nav__item">
+            <a href="/cart" class="icon__item">
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cartCount"></span>
+            </a>
+          </li>
+          <li class="nav__item hamburger">
+            <i class="fas fa-bars show"></i>
+          </li>
+        </ul>
+      </nav>
+      <div class="modal"></div>
     </header>
-    <div class="section new__arrival" id="new__arrival">
-      <div class="arrivals container">
-        <div class="title">
-          <h1 class="primary__title">New Arrival</h1>
-        </div>
-
-        <div class="arrival__center">
-          {% for p in newArrival %}
-          <div class="product">
-            <div class="img__container">
-              <img src="/media/{{p.image}}" />
-            </div>
-            <div class="product__bottom">
-              <div class="rating">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <h3>{{p.product_name}}</h3>
-              <button class="addToCart">Add To Cart</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
+    {% for message in messages %}
+    <div class="notification {{message.tags}}">
+      <p>Message : {{ message }}</p>
+      <i class="fas fa-times closeNoti"></i>
     </div>
-    <div class="special__offer">
-      <div class="offer__container">
-        <h1>SPECIAL OFFER</h1>
-        <p>Special Offer Discount valid for Only this Week</p>
-        <a href="#">SHOP NOW</a>
-      </div>
-    </div>
-    <div class="section featured" id="featured">
-      <div class="featured__container container">
-        <div class="title">
-          <h1 class="primary__title">Featured Products</h1>
-        </div>
-
-        <div class="featured__center">
-          {% for p in product %}
-          <div class="product">
-            <div class="img__container">
-              <img src="/media/{{p.image}}" alt="" />
-            </div>
-            <div class="product__bottom">
-              <h3>{{p.product_name}}</h3>
-              <button class="addToCart">Add To Cart</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
+    {% endfor %} {% block body %}{% endblock body %}
     <footer id="footer" class="section footer">
       <div class="container">
         <div class="footer__top">
           <div class="footer-top__box">
-            <h3>EXTRAS</h3>
-            <a href="#">Brands</a>
-            <a href="#">Gift Certificates</a>
-            <a href="#">Affiliate</a>
-            <a href="#">Specials</a>
-            <a href="#">Site Map</a>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3417.403700402875!2d81.33699871823002!3d21.198443944215917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1639318495290!5m2!1sen!2sin"
+              width="400"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
           </div>
           <div class="footer-top__box">
             <h3>INFORMATION</h3>
@@ -195,6 +146,7 @@
         </div>
       </div>
     </footer>
-    <script src="{% static 'kidswear/index.js' %}"></script>
+    <script src="{% static 'kidswear/javascript/index.js' %}"></script>
+    {% block javascript %}{% endblock javascript %}
   </body>
 </html>

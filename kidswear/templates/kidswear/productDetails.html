@@ -1,0 +1,70 @@
+{% extends 'kidswear/index.html' %} {% load static %} {% block title %}kidswear
+product{% endblock title %} {% block css %}
+<link rel="stylesheet" href="{% static 'kidswear/css/productDetails.css' %}" />
+{% endblock css %} {% block body %}
+<section class="section product-detail">
+  {% for p in product %}
+  <div class="details container">
+    <div class="left image-container">
+      <div class="main">
+        <img src="{{p.image}}" id="zoom" alt="" />
+      </div>
+    </div>
+    <div class="right">
+      <h1>{{p.product_name}}</h1>
+      <div class="price">₹{{p.price}}</div>
+      <div class="prdQuantity">
+        <span class="qtyspan"
+          >Qty :<button class="qtyChange decrease" id="{{p.id}}" onclick="qtydecrease('{{p.id}}')">-</button
+          ><input
+            type="number"
+            readonly
+            class="prdquantity"
+            value="1"
+            min="1"
+            max="10"
+          />
+          <button class="qtyChange increase" id="{{p.id}}" onclick="qtyIncrease('{{p.id}}')">+</button>
+        </span>
+        <button onclick="addToCart('{{p.id}}', '{{p.product_name}}','{{p.image}}','{{p.price}}')" id="{{p.id}}" class="addToCart">Add To Cart</button>
+      </div>
+      <h3>Product Description</h3>
+      <p>{{p.desc}}</p>
+    </div>
+  </div>
+
+  {% endfor %}
+</section>
+<div class="section new__arrival" id="new__arrival">
+  <div class="arrivals container">
+    <div class="title">
+      <h1 class="primary__title">New Arrival</h1>
+    </div>
+
+    <div class="arrival__center">
+      {% for p in newArrival %}
+      <div class="product">
+        <div class="img__container"><a href="/{{p.id}}">
+          <img src="{{p.image}}" /></a>
+        </div>
+        <div class="product__bottom">
+          <h3>{{p.product_name}}</h3>
+          <h4>₹{{p.price}}</h4>
+          <button
+            id="{{p.id}}"
+            class="addToCart"
+            onclick="{addToCart('{{p.id}}', '{{p.product_name}}','{{p.image}}','{{p.price}}')}"
+          >
+            Add To Cart
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock body %}
+{% block javascript %}
+
+<script src="{% static 'kidswear/javascript/productDetails.js' %}"></script>
+{% endblock javascript %}

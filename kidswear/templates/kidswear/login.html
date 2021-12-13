@@ -1,0 +1,26 @@
+{% extends 'kidswear/index.html' %} {% load static %} {% block title %}kidswear login {% endblock title%} {% block css %}
+<link rel="stylesheet" href="{% static 'kidswear/css/form.css' %}" />
+{% endblock css %} {% block body %}
+
+<div class="allTypeFormPage">
+  <div class="mainFormContainer">
+    <div class="form__header">
+      <h2>login</h2>
+      <p>Not have an account ? <a href="/signup">signup</a></p>
+    </div>
+    <span></span>
+    <form id="login__form" class="formClass" action="/login" method="POST">
+      {% csrf_token %} 
+      <div class="form__control">
+        <label htmlFor="username">Username</label>
+        <input type="text" class="username" id="logusername" name="logusername" />
+      </div>
+      <div class="form__control password">
+        <label htmlFor="password">Password</label>
+        <input type="password" id="password" class="logpassword" name="logpassword" />
+      </div>
+      <button type="submit" class="formSubmitBtn">Login</button>
+    </form>
+  </div>
+</div>
+{% endblock body %}
