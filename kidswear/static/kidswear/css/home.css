@@ -1,6 +1,7 @@
 /* =========== Hero ============ */
 .hero {
   min-height: 100vh;
+  width: 100%;
   background: linear-gradient(
       to top,
       rgb(17, 117, 231, 0.5),
